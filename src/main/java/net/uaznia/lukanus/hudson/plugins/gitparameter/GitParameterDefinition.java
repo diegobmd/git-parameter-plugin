@@ -364,6 +364,11 @@ public class GitParameterDefinition extends ParameterDefinition implements Compa
         Iterator<String> remoteBranchesName = branches.keySet().iterator();
         while (remoteBranchesName.hasNext()) {
             String branchName = strip(remoteBranchesName.next(), remoteName);
+
+            if(branchName.startsWith("origin/")){
+                branchName = branchName.substring("origin/".length());
+            }
+
             Matcher matcher = branchFilterPattern.matcher(branchName);
             if (matcher.matches()) {
                 if (matcher.groupCount() == 1) {
